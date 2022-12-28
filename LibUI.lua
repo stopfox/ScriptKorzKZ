@@ -90,7 +90,7 @@ local themeStyles = {
 	-- Цвет текста
     TextColor = Color3.fromRGB(255,255,255),
 	-- Цвет фона у кнопок
-    ElementColor = Color3.fromRGB(20, 20, 20)
+    ElementColor = Color3.fromRGB(105,105,105)
     },
     RJTheme3 = {
 	-- Цвет фона у Секций
