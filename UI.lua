@@ -1,39 +1,131 @@
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/stopfox/ScriptKorzKZ/main/LibUI.lua"))()
-local Window = Library.CreateLib("Name", "RJTheme3")
-local Tab = Window:NewTab("TabName")
-local Section = Tab:NewSection("Section Name")
-Section:NewLabel("LabelText")
+local Rayfield = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Rayfield/main/source'))()
 
+local Window = Rayfield:CreateWindow({
+	Name = "Rayfield Example Window",
+	LoadingTitle = "Rayfield Interface Suite",
+	LoadingSubtitle = "by Sirius",
+	ConfigurationSaving = {
+		Enabled = true,
+		FolderName = nil, -- Create a custom folder for your hub/game
+		FileName = "Big Hub"
+	},
+        Discord = {
+        	Enabled = false,
+        	Invite = "rhmYaRYG8v", -- The Discord invite code, do not include discord.gg/
+        	RememberJoins = true -- Set this to false to make them join the discord every time they load it up
+        },
+	
+	KeySystem = true, -- Set this to true to use our key system
+	KeySettings = {
+		Title = "KorzHub",
+		Subtitle = "Key System",
+		Note = "Join the discord to get key (discord.gg/rhmYaRYG8v)",
+		FileName = "SiriusKey",
+		SaveKey = true,
+		GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
+		Key = 'DJ1932hHFKJA'
+	}
+})
 
-Section:NewButton("ButtonText", "ButtonInfo", function()
-    print("Clicked")
-end)
+Rayfield:Notify("Title Example", "Content/Description Example") -- Notfication -- Title, Content, Image
 
+local Tab = Window:CreateTab("Tab Example") -- Title, Image
 
-Section:NewToggle("ToggleText", "ToggleInfo", function(state)
-    if state then
-        print("Toggle On")
-    else
-        print("Toggle Off")
-    end
-end)
+local Section = Tab:CreateSection("Section Example")
 
+local Button = Tab:CreateButton({
+	Name = "Button Example",
+	Callback = function()
+		-- The function that takes place when the button is pressed
+	end,
+})
 
-Section:NewSlider("SliderText", "SliderInfo", 500, 0, function(s) -- 500 (Макс. значение) | 0 (Мин. значение)
-    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
-end)
+local Toggle = Tab:CreateToggle({
+	Name = "Toggle Example",
+	CurrentValue = false,
+	Flag = "Toggle1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+	Callback = function(Value)
+		-- The function that takes place when the toggle is pressed
+    		-- The variable (Value) is a boolean on whether the toggle is true or false
+	end,
+})
 
+local Slider = Tab:CreateSlider({
+	Name = "Slider Example",
+	Range = {0, 100},
+	Increment = 10,
+	Suffix = "Bananas",
+	CurrentValue = 10,
+	Flag = "Slider1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+	Callback = function(Value)
+		-- The function that takes place when the slider changes
+    		-- The variable (Value) is a number which correlates to the value the slider is currently at
+	end,
+})
 
-Section:NewTextBox("TextboxText", "TextboxInfo", function(txt)
-	print(txt)
-end)
+local Label = Tab:CreateLabel("Label Example")
 
+local Paragraph = Tab:CreateParagraph({Title = "Paragraph Example", Content = "Paragraph Example"})
 
-Section:NewKeybind("KeybindText", "KeybindInfo", Enum.KeyCode.F, function()
-	print("You just clicked the bind")
-end)
+local Input = Tab:CreateInput({
+	Name = "Input Example",
+	PlaceholderText = "Input Placeholder",
+	RemoveTextAfterFocusLost = false,
+	Callback = function(Text)
+		-- The function that takes place when the input is changed
+    		-- The variable (Text) is a string for the value in the text box
+	end,
+})
 
+local Keybind = Tab:CreateKeybind({
+	Name = "Keybind Example",
+	CurrentKeybind = "Q",
+	HoldToInteract = false,
+	Flag = "Keybind1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+	Callback = function(Keybind)
+		-- The function that takes place when the keybind is pressed
+    		-- The variable (Keybind) is a boolean for whether the keybind is being held or not (HoldToInteract needs to be true)
+	end,
+})
 
-Section:NewDropdown("DropdownText", "DropdownInf", {"Option 1", "Option 2", "Option 3"}, function(currentOption)
-    print(currentOption)
-end)
+local Dropdown = Tab:CreateDropdown({
+	Name = "Dropdown Example",
+	Options = {"Option 1","Option 2"},
+	CurrentOption = "Option 1",
+	Flag = "Dropdown1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+	Callback = function(Option)
+	  	  -- The function that takes place when the selected option is changed
+    	  -- The variable (Option) is a string for the value that the dropdown was changed to
+	end,
+})
+
+local Button = Tab:CreateButton({
+	Name = "Destroy UI",
+	Callback = function()
+		Rayfield:Destroy()
+	end,
+})
+
+-- Extras
+
+-- getgenv().SecureMode = true -- Only Set To True If Games Are Detecting/Crashing The UI
+
+-- Rayfield:Destroy() -- Destroys UI
+
+-- Rayfield:LoadConfiguration() -- Enables Configuration Saving
+
+-- Section:Set("Section Example") -- Use To Update Section Text
+
+-- Button:Set("Button Example") -- Use To Update Button Text
+
+-- Toggle:Set(false) -- Use To Update Toggle
+
+-- Slider:Set(10) -- Use To Update Slider Value
+
+-- Label:Set("Label Example") -- Use To Update Label Text
+
+-- Paragraph:Set({Title = "Paragraph Example", Content = "Paragraph Example"}) -- Use To Update Paragraph Text
+
+-- Keybind:Set("RightCtrl") -- Keybind (string) -- Use To Update Keybind
+
+-- Dropdown:Set("Option 2") -- The new option value -- Use To Update/Set New Dropdowns
